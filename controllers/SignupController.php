@@ -36,7 +36,7 @@ class SignupController extends BaseController
             // Подготавливаем данные
             $name = htmlentities($data['name']);
             $email = htmlentities($data['email']);
-            $password = md5(htmlentities($data['name']) . SECRET_SALT);
+            $password = md5(htmlentities($data['password']) . SECRET_SALT);
 
             // Проверяем на наличие email в базе
             $checkUserEmail = $this->signupModel->checkIfUserExists($email);
