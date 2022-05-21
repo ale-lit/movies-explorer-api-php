@@ -3,11 +3,13 @@
 class UserController extends BaseController
 {
     private $userModel;
+    private $signupModel;
     public $isAuthorized;
 
     public function __construct()
     {
         $this->userModel = new User();
+        $this->signupModel = new Signup();
         $this->isAuthorized = $this->userModel->checkIfUserAuthorized();
     }
 
@@ -33,8 +35,8 @@ class UserController extends BaseController
 
     public function getUserInfoByToken()
     {
-        if (apache_request_headers()['Authorization']) {
-            $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['Authorization']));
+        if (apache_request_headers()['authorization']) {
+            $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['authorization']));
             $tokenData = json_decode(base64_decode($tokenData), true);
             return $tokenData;
         } else {
@@ -70,6 +72,12 @@ class UserController extends BaseController
         // Подготавливаем данные
         $name = htmlentities($data['name']);
         $email = htmlentities($data['email']);
+
+        // Проверяем на наличие email в базе
+        $checkUserEmail = $this->signupModel->checkIfUserExists($email);
+        if ($checkUserEmail === '1') {
+            return $this->showConflictError();
+        }
 
         if ($this->userModel->edit($name, $email)) {
             $this->answer = [

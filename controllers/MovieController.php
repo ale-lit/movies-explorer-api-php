@@ -27,10 +27,10 @@ class MovieController extends BaseController
         if ($this->isAuthorized) {
             // Получаем id пользователя
             // TODO: Вынести в отдельную функцию
-            if (!isset(apache_request_headers()['Authorization'])) {
+            if (!isset(apache_request_headers()['authorization'])) {
                 return false;
             }
-            $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['Authorization']));
+            $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['authorization']));
             $tokenData = json_decode(base64_decode($tokenData), true);
             $userId = htmlentities($tokenData['uid']);
 

@@ -15,11 +15,11 @@ class User extends BaseModel
 
     public function checkIfUserAuthorized()
     {   
-        if (!isset(apache_request_headers()['Authorization'])) {
+        if (!isset(apache_request_headers()['authorization'])) {
             return false;
         }
         
-        $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['Authorization']));
+        $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['authorization']));
 
         $tokenData = json_decode(base64_decode($tokenData), true);
 
@@ -43,10 +43,10 @@ class User extends BaseModel
 
     public function edit($name, $email)
     {
-        if (!isset(apache_request_headers()['Authorization'])) {
+        if (!isset(apache_request_headers()['authorization'])) {
             return false;
         }
-        $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['Authorization']));
+        $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['authorization']));
         $tokenData = json_decode(base64_decode($tokenData), true);
         $userId = htmlentities($tokenData['uid']);
 

@@ -12,13 +12,13 @@ class Router
 
     public function run()
     {
-        $requestUri = $_SERVER['REQUEST_URI'];
+        $requestUri = str_replace(SITE_ROOT, "", $_SERVER['REQUEST_URI']);
 
         foreach ($this->routes as $controller => $availablePaths) {
             foreach ($availablePaths as $path => $rawActionWithParameters) {
                 if (preg_match("~$path~", $requestUri)) {
                     $actionWithParameters = preg_replace("~$path~", $rawActionWithParameters, $requestUri);
-                    $actionWithParameters = str_replace(SITE_ROOT, "", $actionWithParameters);
+                    // $actionWithParameters = str_replace(SITE_ROOT, "", $actionWithParameters);
                     $actionWithParameters = explode('?', $actionWithParameters)[0];
                     $actionWithParameters = ltrim($actionWithParameters, "/");
                     $actionWithParameters = explode('/', $actionWithParameters);
