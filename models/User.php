@@ -40,4 +40,22 @@ class User extends BaseModel
 
         return true;
     }
+
+    public function edit($name, $email)
+    {
+        if (!isset(apache_request_headers()['Authorization'])) {
+            return false;
+        }
+        $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['Authorization']));
+        $tokenData = json_decode(base64_decode($tokenData), true);
+        $userId = htmlentities($tokenData['uid']);
+
+        $query = "
+            UPDATE `users`
+                SET `user_name` = '$name',
+                    `user_email` = '$email'
+            WHERE `user_id` = $userId;
+        ";
+        return mysqli_query($this->connect, $query);
+    }
 }
