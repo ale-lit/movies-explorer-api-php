@@ -42,13 +42,15 @@ class SigninController extends BaseController
             if ($userInfo['count'] === '0') {
                 return $this->showNotAuthorized("Передан неверный логин или пароль");
             }
-
+            
             $token = $this->helper->generateToken();
-            $tokenTime = time() + 30 * 60;
             $userId = $userInfo['user_id'];
-            $this->signinModel->auth($userId, $token, $tokenTime);
 
-            $this->answer = [ "token" => "Bearer " . $token ];
+            $this->signinModel->auth($userId, $token);
+
+            $resToken = base64_encode(json_encode([ "uid" => $userId, "t" => $token ]));
+
+            $this->answer = [ "token" => "Bearer " . $resToken ];
             $this->sendAnswer();
         } else {
             $this->showNotAllowed();

@@ -5,5 +5,5 @@ $db = array(
     'USER' => 'root',
     'PASSWORD' => '',
     'DB_NAME' => 'movies',
-    'CHARSET' => 'utf8'
+    'CHARSET' => 'utf8mb4'
 );
