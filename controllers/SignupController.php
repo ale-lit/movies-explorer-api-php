@@ -1,9 +1,6 @@
 <?php
 
 // Регистрация
-
-define("SECRET_SALT", "4e2H34b3hbsd2vCD@!h1j");
-
 class SignupController extends BaseController
 {
     private $signupModel;
@@ -28,7 +25,7 @@ class SignupController extends BaseController
             if (mb_strlen($data['name']) < 2 || mb_strlen($data['name']) > 30 || !is_string($data['name'])) {
                 return $this->showBadRequest("Переданы некорректные данные (имя пользователя)");
             }
-            if (!is_string($data['email']) || !preg_match("/^((([0-9A-Za-z]{1}[-0-9A-z\.]*[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]*[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u", $data['email'])) {
+            if (!is_string($data['email']) || !preg_match(REGEX_EMAIL, $data['email'])) {
                 return $this->showBadRequest("Переданы некорректные данные (Email)");
             }
             if (!is_string($data['password'])) {

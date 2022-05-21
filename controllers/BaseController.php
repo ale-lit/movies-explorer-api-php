@@ -11,9 +11,6 @@ abstract class BaseController
         header('HTTP/1.1 200 OK');
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin');
 
         echo json_encode($this->answer, JSON_UNESCAPED_UNICODE);
     }
@@ -23,9 +20,6 @@ abstract class BaseController
         header('HTTP/1.1 201 Created');
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin');
         
         echo json_encode($this->answer, JSON_UNESCAPED_UNICODE);
     }
@@ -33,21 +27,13 @@ abstract class BaseController
     protected function showNotFound()
     {
         header('HTTP/1.1 404 Not Found');
-        header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin');
     }
 
     protected function showNotAllowed()
     {
         header('HTTP/1.1 405 Not Allowed');
-        header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin');
     }
 
     protected function showBadRequest($message = false)
@@ -55,9 +41,6 @@ abstract class BaseController
         header('HTTP/1.1 400 Bad Request');
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin');
 
         if ($message) {
             $this->answer = [ "message" => $message ];
@@ -71,9 +54,6 @@ abstract class BaseController
         header('HTTP/1.1 409 Conflict');
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin');
 
         $this->answer = [ "message" => "Указанные данные уже есть в базе" ];
         header('Content-type: application/json');
@@ -85,10 +65,7 @@ abstract class BaseController
         header('HTTP/1.1 401 Unauthorized');
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Authorization, X-Requested-With, Content-Type, Accept, Origin');
-        
+
         if ($message) {
             $this->answer = [ "message" => $message ];
             header('Content-type: application/json');

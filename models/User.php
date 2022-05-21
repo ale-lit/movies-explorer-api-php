@@ -18,7 +18,7 @@ class User extends BaseModel
         if (!isset(apache_request_headers()['Authorization'])) {
             return false;
         }
-
+        
         $tokenData = str_replace("Bearer ", "", htmlentities(apache_request_headers()['Authorization']));
 
         $tokenData = json_decode(base64_decode($tokenData), true);

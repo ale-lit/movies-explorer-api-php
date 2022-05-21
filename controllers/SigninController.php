@@ -1,9 +1,6 @@
 <?php
 
 // Авторизация
-
-define("SECRET_SALT", "4e2H34b3hbsd2vCD@!h1j");
-
 class SigninController extends BaseController
 {
     private $signinModel;
@@ -27,7 +24,7 @@ class SigninController extends BaseController
             }
 
             // Проверяем на валидность
-            if (!is_string($data['email']) || !preg_match("/^((([0-9A-Za-z]{1}[-0-9A-z\.]*[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]*[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u", $data['email'])) {
+            if (!is_string($data['email']) || !preg_match(REGEX_EMAIL, $data['email'])) {
                 return $this->showBadRequest("validation");
             }
             if (!is_string($data['password'])) {
