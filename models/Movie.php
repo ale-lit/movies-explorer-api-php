@@ -77,4 +77,14 @@ class Movie extends BaseModel
         }
         return $result;
     }
+
+    public function remove($movieId, $userId)
+    {
+        $query = "
+            DELETE FROM `saved`
+                WHERE `saved_user_id` = $userId
+                    AND `saved_movie_id` = $movieId;
+        ";
+        return mysqli_query($this->connect, $query);
+    }
 }
