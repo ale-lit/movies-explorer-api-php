@@ -4,8 +4,7 @@
 
 ▼ ▼ ▼
 ------------- |
-<a href="https://ale-lit.ru/movies-explorer/"><img src="https://github.com/ale-lit/ale-lit/blob/main/screens/movies-explorer.jpg" alt="Movies Explorer"></a>
-| <div align="center">**https://ale-lit.ru/movies-explorer/**</div> |
+<a href="#_"><img src="https://github.com/ale-lit/ale-lit/blob/main/screens/telegraph.jpg" alt="Telegraph"></a>
 
 </div>
 
